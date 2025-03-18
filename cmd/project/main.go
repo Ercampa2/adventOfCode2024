@@ -50,6 +50,6 @@ func main() {
         return
     }
 
-    fmt.Println(operacoes[int(dia)][int(parte)]())
+    fmt.Println(operacoes[int(dia)][int(parte) - 1]())
     fmt.Println("OK")
 }
