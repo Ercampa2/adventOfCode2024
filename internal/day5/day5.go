@@ -3,18 +3,21 @@ package day5
 import (
 	"bufio"
 	"os"
+	"slices"
+	"sort"
 	"strconv"
 	"strings"
 
 	"adventOfCode2024/pkg/utils"
 )
 
-func Part1 () int {
+func processData() (int, int){
     file, err := os.Open("./assets/input5.txt")
     utils.Check(err)
     defer file.Close()
 
-    var total int
+    var total_right int
+    var total_wrong int
     rules := make(map[string][]string)
 
     scanner := bufio.NewScanner(file)
@@ -51,23 +54,26 @@ func Part1 () int {
             if (valid) {
                 val, err := strconv.Atoi(numbers[(len(numbers)-1) / 2])
                 utils.Check(err)
-                total += val
+                total_right += val
+            } else {
+                sort.Slice(numbers, func(i, j int) bool {
+                    return !slices.Contains(rules[numbers[i]],numbers[j])
+                })
+                val, err := strconv.Atoi(numbers[(len(numbers)-1) / 2])
+                utils.Check(err)
+                total_wrong += val
             }
         }
     }
-    return total
+    return total_right, total_wrong
+}
+
+func Part1 () int {
+    result, _ := processData()
+    return result
 }
 
 func Part2() int {
-    file, err := os.Open("./assets/input5.txt")
-    utils.Check(err)
-    defer file.Close()
-
-    scanner := bufio.NewScanner(file)
-    var lines []string
-    for scanner.Scan() {
-        lines = append(lines, scanner.Text())
-    }
-
-    return 4
+    _, result := processData()
+    return result
 }
