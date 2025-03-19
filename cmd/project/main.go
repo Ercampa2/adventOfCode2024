@@ -11,6 +11,7 @@ import (
 	"adventOfCode2024/internal/day3"
 	"adventOfCode2024/internal/day4"
 	"adventOfCode2024/internal/day5"
+	"adventOfCode2024/internal/day6"
 )
 
 // Main
@@ -43,6 +44,7 @@ func main() {
         {day3.Part1, day3.Part2},
         {day4.Part1, day4.Part2},
         {day5.Part1, day5.Part2},
+        {day6.Part1, day6.Part2},
     }
 
     if (dia > len(operacoes) - 1) {
